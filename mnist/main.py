@@ -79,6 +79,8 @@ def main():
     
     parser.add_argument('--save-model', action='store_true', default=False,
                         help='For Saving the current Model')
+    parser.add_argument('--save-path', type = str, default="")
+
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
 
@@ -110,7 +112,7 @@ def main():
         test(args, model, device, test_loader)
 
     if (args.save_model):
-        torch.save(model.state_dict(),"mnist_cnn.pt")
+        torch.save(model.state_dict(), args.save_path + "/mnist_cnn.pt")
         
 if __name__ == '__main__':
     main()

@@ -1,0 +1,23 @@
+    version: 1
+
+    kind: experiment
+
+    build:
+      image: pytorch/pytorch:1.0.1-cuda10.0-cudnn7-runtime
+      build_steps: 
+      - pip install -r requirements.txt
+
+    environment:
+      resources:
+        cpu:
+          requests: 3
+          limits: 8
+        memory:
+          requests: 14000
+          limits: 29000
+        gpu:
+          requests: 1
+          limits: 1
+    run:
+      #cmd: echo "Starting to Run!" ; echo $POLYAXON_RUN_OUTPUTS_PATH ; echo "------------------------------------------------" ; python mnist/main.py --epochs 1 --save-model --save-path $POLYAXON_RUN_OUTPUTS_PATH
+      cmd: echo "Starting to Run!" ; python mnist/testsingle.py --model-path "mnist/mnist_cnn.pt" --img-path "mnist/img_9.jpg"
